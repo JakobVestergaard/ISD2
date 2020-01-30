@@ -21,6 +21,9 @@ using namespace std;
 class TCPServer
 {
 	public:
+    // n = number of bytes recieved
+    // sockfd = socket filedescriptor
+    // newsockfd = The new socket 
 	int sockfd, newsockfd, n, pid;
 	struct sockaddr_in serverAddress;
 	struct sockaddr_in clientAddress;

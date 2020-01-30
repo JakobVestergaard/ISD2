@@ -5,17 +5,20 @@ TCPServer tcp;
 
 void * loop(void * m)
 {
-        pthread_detach(pthread_self());
+    /*When a detached thread terminates, its resources are
+       automatically released back to the system without the need for
+       another thread to join with the terminated thread.*/
+    pthread_detach(pthread_self());
 	while(1)
 	{
-		srand(time(NULL));
-		char ch = 'a' + rand() % 26;
-		string s(1,ch);
+		//srand(time(NULL));
+		//char ch = 'a' + rand() % 26;
+		//string s(1,ch);
 		string str = tcp.getMessage();
 		if( str != "" )
 		{
 			cout << "Message:" << str << endl;
-			tcp.Send(" [client message: "+str+"] "+s);
+			tcp.Send("client message: "+str+"");
 			tcp.clean();
 		}
 		usleep(1000);
