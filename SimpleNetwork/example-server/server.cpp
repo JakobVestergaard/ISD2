@@ -18,7 +18,9 @@ void * loop(void * m)
 		if( str != "" )
 		{
 			cout << "Message:" << str << endl;
+            // send(newsockfd,msg.c_str(),msg.length(),0);
 			tcp.Send("client message: "+str+"");
+            // clean() set Message = "" and memsets with 0's
 			tcp.clean();
 		}
 		usleep(1000);

@@ -7,7 +7,7 @@
 
 int main(int argc, char* argv[]) {
 
-	FILE *fp = NULL;
+
 	pid_t process_id = 0;
 	pid_t sid = 0;
 
