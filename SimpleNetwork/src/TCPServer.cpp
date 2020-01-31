@@ -52,7 +52,7 @@ string TCPServer::receive()
         // Accept() is a blocking call
         // add errorhandling
 		newsockfd = accept(sockfd,(struct sockaddr*)&clientAddress,&sosize);
-        /*     The inet_ntoa() function converts the Internet host address in, given
+        /*The inet_ntoa() function converts the Internet host address in, given
        in network byte order, to a string in IPv4 dotted-decimal notation.
        The string is returned in a statically allocated buffer, which
        subsequent calls will overwrite.*/
