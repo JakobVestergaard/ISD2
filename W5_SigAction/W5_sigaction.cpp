@@ -12,19 +12,17 @@
 #include<string.h>
 
 // Uncomment to debug
-//#define debug
+#define debug
 
 void sig_handler(int sig, siginfo_t *siginfo, void *context)
 {
-	{ 
         // Send a cancellation signal to the listener
 		perror ("Received a terminate signal");
 		// Brutally kill the listener
-		printf("\nDo stuff!");
-	}
+		printf("\nuse \"pkill -9\" to actually kill me!");
 }
 
-int main(void)
+int main(int argc, char * argv[])
 {
     struct sigaction act;
     #ifdef debug
@@ -43,7 +41,9 @@ int main(void)
 		printf("\nsigaction failed to install");
 	}
     #ifdef debug
-    printf("\nAll set ready to terminate on request!");
+    printf("\nUse \"pkill %s\"",argv[0]);
+    printf("\nAll set ready to terminate on request!\n");
+    fflush(stdout);
     #endif
     while(1);
 }
