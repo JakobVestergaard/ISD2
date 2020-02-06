@@ -15,7 +15,7 @@ void * loop(void * m)
     /*When a detached thread terminates, its resources are
        automatically released back to the system without the need for
        another thread to join with the terminated thread.*/
-    pthread_detach(pthread_self());
+    //pthread_detach(pthread_self());
 	while(1)
 	{
 		//srand(time(NULL));
@@ -25,7 +25,8 @@ void * loop(void * m)
 		if( str != "" )
 		{
 			cout << "Message:" << str << endl;
-			tcp.Send("client message: "+str+"");
+			tcp.Send("client message: "+str); 
+            // +str+ concatinates "client message" with "incoming string" + "string3"
 			tcp.clean();
 		}
 		usleep(1000);
@@ -34,8 +35,6 @@ void * loop(void * m)
 }
 
 void forky() {
-
-
 	pid_t process_id = 0;
 	pid_t sid = 0;
 
@@ -72,7 +71,6 @@ void forky() {
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
 	close(STDERR_FILENO);
-
 }
 
 int main()
