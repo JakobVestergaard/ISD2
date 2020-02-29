@@ -21,10 +21,8 @@ void main(void)
     // GPIO-value holder may change at any time
     volatile uint32_t GPIO;
 
-    /* Set GPO pin */
     // pr1_pru1pru_r31_16
     // P9_30
-    // is bit 2 in R30 (0-1-2 = 3)
     while (1)
     {
         GPIO = shared[0];
