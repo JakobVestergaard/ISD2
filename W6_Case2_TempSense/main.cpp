@@ -1,14 +1,17 @@
 #include <iostream>
 #include "TCPServer.h"
+#include "setitimer.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <string.h>
+#include <string>
 #include <pthread.h>
 
 TCPServer tcp;
+
+extern char tempHolder = 0;
 
 void * loop(void * m)
 {
@@ -21,14 +24,18 @@ void * loop(void * m)
 		//srand(time(NULL));
 		//char ch = 'a' + rand() % 26;
 		//string s(1,ch);
+        string str2 = "GET_TEMP";
+        size_t len = str2.length();
 		string str = tcp.getMessage();
-		if( str != "" )
-		{
+        if(str.compare(0, len, str2) == 0){
+            //cout << "Temperature: " << tempHolder << endl;
+            tcp.Send("Temperature: "+tempHolder);          
+        } else if(str != ""){
 			cout << "Message:" << str << endl;
 			tcp.Send("client message: "+str); 
             // +str+ concatinates "client message" with "incoming string" + "string3"
-			tcp.clean();
-		}
+		} 
+        tcp.clean();
 		usleep(1000);
 	}
 	tcp.detach();
@@ -75,7 +82,8 @@ void forky() {
 
 int main()
 {
-    forky();
+    //forky();
+    init_setitimer();
    	pthread_t msg;
 	tcp.setup(1987);
 	if( pthread_create(&msg, NULL, loop, (void *)0) == 0)

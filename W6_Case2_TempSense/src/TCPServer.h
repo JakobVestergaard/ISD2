@@ -13,10 +13,13 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <pthread.h>
+#include <iostream>
 
 using namespace std;
 
 #define MAXPACKETSIZE 4096
+
+extern char tempHolder;
 
 class TCPServer
 {
