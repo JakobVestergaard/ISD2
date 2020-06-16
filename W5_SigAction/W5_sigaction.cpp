@@ -19,16 +19,14 @@ void sig_handler(int sig, siginfo_t *siginfo, void *context)
         // Send a cancellation signal to the listener
 		perror ("Received a terminate signal");
 		// Brutally kill the listener
-		printf("\nuse \"pkill -9\" to actually kill me!");
+		printf("\nuse \"kill -9 %d\" to actually kill me!",getpid());
 }
 
 int main(int argc, char * argv[])
 {
     struct sigaction act;
-    #ifdef debug
-    printf("\nReady to go!");
-    #endif
     memset(&act, '\0', sizeof(act));
+
 
     // Install a signal handler
 	// Use the sa_sigaction field because the handles has two
@@ -41,7 +39,7 @@ int main(int argc, char * argv[])
 		printf("\nsigaction failed to install");
 	}
     #ifdef debug
-    printf("\nUse \"pkill %s\"",argv[0]);
+    printf("\nUse \"kill -SIGTERM %d\"",getpid());
     printf("\nAll set ready to terminate on request!\n");
     fflush(stdout);
     #endif

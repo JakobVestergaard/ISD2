@@ -5,6 +5,8 @@
 #include <sys/stat.h>
 #include <string.h>
 
+#include <syslog.h>
+
 int main(int argc, char* argv[]) {
 
 
@@ -39,25 +41,24 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	// Change the current working directory to root.
-	chdir("/home/jakob/ISD2/eclipse_workspace/W5_Forking_Example");
 
 	// Close stdin. stdout and stderr
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
 	close(STDERR_FILENO);
 
-	// Open a log file in write mode.
-	fp = fopen("Log.txt", "w+");
+	// Write to syslog
+	syslog (LOG_NOTICE, "Program started by User %d", getuid ());
+
+	syslog (LOG_NOTICE, "Standard file descriptors closed.");
 
 	while (1) {
 		//Dont block context switches, let the process sleep for some time
 		sleep(1);
-		fprintf(fp, "Logging info...\n");
-		fflush(fp);
+		syslog (LOG_NOTICE, "I logged!");
+		syslog (LOG_INFO, "A tree falls in a forest");
 	// Implement and call some function that does core work for this daemon.
 	}
-
-	fclose(fp);
+	closelog ();
 	return (0);
 }

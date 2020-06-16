@@ -19,10 +19,10 @@ int main ()
  sa.sa_handler = &timer_handler;
  sigaction (SIGVTALRM, &sa, NULL);
 
- /* Configure the timer to expire after 250 msec... */
+ /* Configure the timer to expire after 3 sec... */
  timer.it_value.tv_sec = 3;
  timer.it_value.tv_usec = 0;
- /* ... and every 250 msec after that. */
+ /* ... and every 1 sec after that. */
  timer.it_interval.tv_sec = 1;
  timer.it_interval.tv_usec = 0;
  /* Start a virtual timer. It counts down whenever this process is
