@@ -9,7 +9,6 @@
 
 int main(int argc, char* argv[]) {
 
-
 	pid_t process_id = 0;
 	pid_t sid = 0;
 
@@ -29,9 +28,6 @@ int main(int argc, char* argv[]) {
 		// return success in exit status
 		exit(0);
 	}
-
-	//unmask the file mode
-	umask(0);
 
 	//set new session
 	sid = setsid();
